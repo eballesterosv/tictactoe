@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="tic tac toe game">
+    <meta name="author" content="Erayde Vázquez">
+    <meta property="og:url" content="https://sporten.netlify.app" />
+    <meta property="og:image" content="./imgs/ogImage.png" />
+    <meta name="keywords" content="javascript,game,tic,tac,toe,html,css">
+    <meta property="og:title" content="Vsoft tic tac toe" />
+    <meta property="og:description" content="Tic tac toe game" />
+    <meta property="og:type" content="website"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <link rel="icon" href="./imgs/vsoft.ico" type="image/ico" >
+    <title>Vsoft Tic Tac Toe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="flex_column_center">
+    <header></header>
+    <nav></nav>
+    <main class="flex_column_center">
+        <img src="./imgs/x.png" class="disappear">
+        <img src="./imgs/o.png" class="disappear">
+        <span id="anuncio" class="flex_column_center">Empate OX</span>
+        <section class="gameTable flex_row_center" id="tablero">
+            <button id="8" data-value="1"></button>
+            <button id="7" data-value="2"></button>
+            <button class="button_right" id="6" data-value="4"></button>
+            <button id="5" data-value="8"></button>
+            <button id="4" data-value="16"></button>
+            <button class="button_right" id="3" data-value="32"></button>
+            <button  class="button_bottom" id="2" data-value="64"></button>
+            <button  class="button_bottom" id="1" data-value="128"></button>
+            <button class="button_right button_bottom" id="0" data-value="256"></button>
+        </section>
+        <button id="reiniciar" class="ocultar">Jugar de nuevo</button>
+    </main>
+    <footer></footer>
+    <script src="script.js"></script>
+</body>
+</html>

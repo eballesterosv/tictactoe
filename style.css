@@ -1,0 +1,93 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select : none;
+}
+body{
+    background-color: #678;
+    width: 100vw;
+    height : 100vh;
+    overflow-x: hidden;
+}
+main{
+    width:100%;
+}
+section{
+    width: 20em;
+}
+button{
+    width: 6em;
+    height: 6em;
+    background-color: #fff0;
+    color:aqua;
+    background-size: contain;
+    background-repeat: no-repeat;
+    font : 300 1em "Arial", san-serif;
+    border-width: thick;
+    border-top-width: 0;
+    border-left-width: 0;
+    outline : none;
+    transition:1s;
+}
+span{
+    width:20em;
+    font : 300 2em "Arial",san-serif;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.5s;
+}
+button img{
+    transition: 2s;
+    animation : present 0.35s 1 ease-in;    
+}
+
+button:hover,button:active{
+    border-color:#000;
+}
+.flex_row_center{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.flex_column_center{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.button_right{
+    border-right-width: 0;
+}
+.button_bottom{
+    border-bottom-width: 0;
+}
+.ocultar,.mostrar{
+    width : 10em;
+    height : 3em;
+    border : thin solid #ddd;
+    border-radius: 0.5em;
+    margin : 2em;
+    opacity : 0;
+    visibility: hidden;
+}
+.mostrar{
+    opacity: 1;
+    visibility: visible;
+}
+.ocultarTablero{
+    width:0;
+    height:0;
+    background-color: #0000;
+    border:none;
+}
+.disappear{
+    display:none;
+}
+span.flex_column_center{
+    border-width: 0;
+}
+@keyframes present{
+    0%{opacity:0}
+    100%{opacity:1}
+}
