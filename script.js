@@ -49,7 +49,16 @@ try{
     const checarPosiciones = (en,ocupadas,...posiciones) => posiciones.every(posicion=>en.toString(2).padStart(9,"0")[posicion]==ocupadas) ? 
                             posiciones : false;
 
+    const primerPosicionLibre = () => {
+        const linea = Array.from((juego.x.value^juego.o.value).toString(2).padStart(9,"0"));
+        for(let posicion = 0; posicion<linea.length; posicion++){
+            if(linea[posicion]==0) {
+                return posicion;
+            }
+        }
+    }
     const elegirPosicion = (linea) => {
+        if(!linea) return primerPosicionLibre();
         const center = checarPosiciones(juego.o.value^juego.x.value ,false, linea[1]);
         const left = checarPosiciones(juego.o.value^juego.x.value,false, linea[0]);
         const right = checarPosiciones(juego.o.value^juego.x.value,false, linea[2]);
@@ -74,22 +83,22 @@ try{
     }
 
     const buscarHorizontalesLibres = function(en){
-        const a = checarPosiciones(  en.toString(2).padStart(9,"0"),false, 0,1,2);
-        const b = checarPosiciones(  en.toString(2).padStart(9,"0"),false, 3,4,5);
-        const c = checarPosiciones(  en.toString(2).padStart(9,"0"),false, 6,7,8);
+        const a = checarPosiciones(  en,false, 0,1,2);
+        const b = checarPosiciones(  en,false, 3,4,5);
+        const c = checarPosiciones(  en,false, 6,7,8);
         return eliminarElementosFalsos([a,b,c]);
     }
 
     const buscarVerticalesLibres = function(en){
-        const a = checarPosiciones(  en.toString(2).padStart(9,"0"),false, 0,3,6);
-        const b = checarPosiciones(  en.toString(2).padStart(9,"0"),false, 1,4,7);
-        const c = checarPosiciones(  en.toString(2).padStart(9,"0"),false, 2,5,8);
+        const a = checarPosiciones(  en,false, 0,3,6);
+        const b = checarPosiciones(  en,false, 1,4,7);
+        const c = checarPosiciones(  en,false, 2,5,8);
         return eliminarElementosFalsos([a,b,c]);
     }
 
     const buscarDiagonalesLibres = function(en){
-        const a = checarPosiciones(  en.toString(2).padStart(9,"0"),false, 8,4,0);
-        const b = checarPosiciones(  en.toString(2).padStart(9,"0"),false, 6,4,2);
+        const a = checarPosiciones(  en,false, 8,4,0);
+        const b = checarPosiciones(  en,false, 6,4,2);
         return eliminarElementosFalsos([a,b,]);
     }
 
@@ -111,7 +120,7 @@ try{
         const lineas = (checar == 16 || checar == 272 || checar == 80 || checar == 20 || checar == 17 ) ? buscarLineas(buscarDiagonalesLibres,en) : buscarLineas(fn,en);
         const lineaElementoCentro = lineas ?  lineas.filter(linea=>checarLineaElementoCentro(linea,checar))[0] : false;
         const lineaConveniente = lineaElementoCentro ? lineaElementoCentro : lineas ? lineaConElementoEn(checar,[...lineas])[0] : false;
-        return  lineaElementoCentro ? random(lineaElementoCentro[0],lineaElementoCentro[2]) : lineaConveniente ? elegirPosicion(lineaConveniente) : false;
+        return  lineaElementoCentro ? random(lineaElementoCentro[0],lineaElementoCentro[2]) : elegirPosicion(lineaConveniente);
     }
 
     const verificarVictoria = (en) => {
@@ -138,6 +147,7 @@ try{
         } 
         juego.robot = !juego.robot;
         juego.usuario = !juego.usuario;
+        return posicion;
     }
 
     const actuarRobot = function(){
@@ -168,14 +178,14 @@ try{
                     if(posicion) return responder(posicion);
                 }
             }
-            return responder(asignarPosicion(buscarHorizontalesLibres,juego.x.value,juego.o.value) || asignarPosicion(buscarVerticalesLibres,juego.x.value,juego.o.value));    
-    }
+            return responder(asignarPosicion(buscarHorizontalesLibres,juego.x.value,juego.o.value));     
+        }
 
     const actuarUsuario = function(){ 
         if(!juego.usuario || juego.terminado) return false;
         const posicionLibre = checarPosiciones(juego.o.value^juego.x.value,false,this.id);
         const actualizarValores = posicionLibre ? valuar.call(this,juego.o) : null;
-        const terminado = checarPosiciones(juego.o.value^juego.x.value,true,0,1,2,3,4,5,6,7,8);
+        const terminado = (juego.o.value^juego.x.value) == 511 ? true : false;
         if(actualizarValores) return responder(this.id,terminado);
     }
 
