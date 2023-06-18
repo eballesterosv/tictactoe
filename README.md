@@ -1,6 +1,6 @@
 # tictactoe
 Tic-tac-toe game.
-View in live -> PLAYIT ->  https://vsoft-tic-tac.netlify.app/
+View in live -> PLAYIT (y)->  https://vsoft-tic-tac.netlify.app/
 
 Este juego no implementa ningún algoritmo de teoría de juegos, como minimax.
 
